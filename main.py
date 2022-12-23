@@ -48,7 +48,7 @@ def postText(title):
         x = x + 1
         print(x)
 
-    link = "https://sourceforge.net/projects/xiaomi-eu-multilang-miui-roms/files" + title[39:]
+    link = title
 
     text = f"Обновление {type} | {version} доступно для {name}\n\n{link}\n\n{posttext}"
     return text
@@ -80,7 +80,7 @@ async def getLastBuildDate():
 @dp.message_handler(commands=['manual'])
 async def manualPost(message: types.Message):
     if message.chat.id == -1001220184990:
-        title = message.text
+        title = str(message.get_args())
         text = postText(title)
         photo = postPhoto(title)
         await bot.send_photo(chat_id="@xiaomieu_channel", photo=photo, caption=text, parse_mode="HTML")
